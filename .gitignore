@@ -1,0 +1,9 @@
+# project configuration directory
+.idea/
+
+# latex generated files
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.synctex.gz
+paper/*.toc
