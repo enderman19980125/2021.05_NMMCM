@@ -14,14 +14,14 @@
 \usepackage{newtxtext}
 \usepackage{lipsum}
 \usepackage{cite}
-
+\usepackage{amsmath}
 \usepackage{paralist}
-\let\itemize\compactitem
-\let\enditemize\endcompactitem
-\let\enumerate\compactenum
-\let\endenumerate\endcompactenum
-\let\description\compactdesc
-\let\enddescription\endcompactdesc
+\newcommand{\itemize}{\compactitem}
+\newcommand{\enditemize}{\endcompactitem}
+\newcommand{\enumerate}{\compactenum}
+\newcommand{\endenumerate}{\endcompactenum}
+\newcommand{\description}{\compactdesc}
+\newcommand{\enddescription}{\endcompactdesc}
 
 \setlength\abovedisplayskip{5pt}
 \setlength\belowdisplayskip{-8pt}
@@ -83,7 +83,7 @@
   \item {在新建新的线路的过程中，我们需要选择新的地点，来确保更多人会选择地铁这种运行方式，并且需要预测出每天至少需要多少人，才能满足地铁盈利的需求。}
   \item {考虑到疫情的特殊背景，我们需要对不同站点的学生和工作者进行出行时间设定，以满足疫情防控的需要}
   \item {将公交和地铁结合，通过相互补充满足更多人员高峰出行的需求。}
-  
+
   {一些都可以用的东西。轨道交通影响整个城市的运转效率，发车间隔对整个轨道系统影响至关重要。运营公司自然希望在满足客流需求的太欧剑侠获得最大的收益，尽可能提升列车周转量与满载率。}
   {假设到站乘客服从均匀分布}
 \end{enumerate}
@@ -204,6 +204,117 @@
 
 \subsection{问题一的分析和求解}
 
+首先，我们分析并提炼附件2中客流量的数据特征，使用高斯混合模型 (GMM, Gaussian mixture model) 结合随机噪声 (random noise) ，生成了5组仿真模拟数据。随后，根据地铁的发车间隔和运行速度，我们编写代码模拟 (simulate) 了整个地铁的运行过程。最后，我们统计了每趟列车的车载人数的变化情况，分析得出最优的车厢数量方案，并使用聚类算法 (cluster algorithm) 分段求解最优的发车间隔。
+
+\subsubsection{时间度量的映射}
+
+我们设 $t$ 是一个表示时间的变量。$t$ 的值加1表示过了一分钟。我们设定当 $t=0$ 时表示一天的开始时刻，则 $t=720$ 时表示一天的正午时刻， $t=1440$ 时表示一天的结束时刻。地铁的首班列车发车时间是早上6时，此时 $t=360$，末班列车发车时间是晚上22时，此时 $t=1320$。
+
+我们考虑一个连续型的概率密度函数 (Probability Density Function)，不妨记为 $P(x)$。由于 $P(x)$ 是一个定义在 $(-\infty,\infty)$ 上的函数，而地铁一天的运行时间只有16个小时，因此我们需要对时间建立一个从 $(-\infty,\infty)$ 到 $[360,1320]$ 的映射。设映射后的概率密度函数为 $Q(t)$，映射算子为 $T(\cdot)$，映射过程如公式\ref{eq:p1_def-map-continuous}所示。映射过程的含义是，仅考虑$P(x)$ 在 $[360,1320]$ 上的取值，再做一个归一化操作。
+
+\begin{equation}
+    Q(t) = T(P(t)) = \frac{1}{\int_{360}^{1320}P(x)dx} P(t)
+    \label{eq:p1_def-map-continuous}
+\end{equation}
+
+其中，$\int_{360}^{1320}P(x)dx$ 是归一化因子，确保概率密度函数 $Q(t)$ 在区间 $[360,1320]$ 上的积分值为1。
+
+同理，对于离散型的概率密度函数 $Q(s)$，设其定义域为集合 $S$。映射算子 $T(\cdot)$ 的定义如公式\ref{eq:p1_def-map-disperse}所示。映射过程的含义是，仅考虑$P(x)$ 在集合 $S$ 上的取值，再做一个归一化操作。
+
+\begin{equation}
+    Q(s) = T(P(s)) = \frac{1}{\sum_{x \in S} x} P(s)
+    \label{eq:p1_def-map-disperse}
+\end{equation}
+
+\subsubsection{高斯混合模型的建立}
+
+高斯混合模型 (GMM, Gaussian mixture model) 是多个高斯分布 (Normal Distribution) 的叠加。形式化地，一个均值为 $\mu$ 方差为 $\sigma^2$ 的高斯分布，其概率密度函数 $P(x;\mu,\sigma^2)$ 如公式\ref{eq:p1_normal-distribution}所示。
+
+\begin{equation}
+    P(x;\mu,\sigma^2) = \frac{1}{\sqrt{2\pi}\sigma} \exp \left( - \frac{(x-\mu)^2}{2\sigma^2} \right)
+    \label{eq:p1_normal-distribution}
+\end{equation}
+
+现有 $N$ 个高斯分布，其均值分别为 $\mu_1$、$\mu_2$、$\cdots$、$\mu_N$，其方差分别为 $\sigma^2_1$、$\sigma^2_2$、$\cdots$、$\sigma^2_N$，则其概率密度函数分别为 $P_1(x;\mu_1,\sigma^2_1)$、$P_2(x;\mu_2,\sigma^2_2)$、$\cdots$、$P_N(x;\mu_N,\sigma^2_N)$。设每个高斯分布发生的概率为 $\alpha_1$、$\alpha_2$、$\cdots$、$\alpha_N$，则高斯混合模型 $P_0(x)$ 可按照公式\ref{eq:p1_def-gmm-continuous}构建。
+
+\begin{equation}
+    P_0(x) = \sum_{i=1}^{N} \alpha_i P_i(x;\mu_i,\sigma^2_i)
+    \label{eq:p1_def-gmm-continuous}
+\end{equation}
+
+其中，$\sum_{i=1}^{N} \alpha_i=1$。
+
+\subsubsection{客流量数据的特征分析}
+
+附件2中的客流量数据存在诸多明显不符合实际情况的地方，其中两处最明显的错误是：
+
+\begin{itemize}
+  \item 每天早上出站人数均远多于进站人数。例如对于9月1日的数据，截至早上9时，累计进站11517人次，累计出站14591人次，这在实际生活中是明显不可能出现的情况。
+  \item 末班车在晚上22时由起点站发车，但是在末班车开走之后，仍有旅客进站。例如对于9月1日的数据，1号线于22时由1a站和1t站分别发出当天的最后一班列车，但是在22:15分还有8人进入1a站，在22:30分还有9人进入1a站，在22:15分还有10人进入1a站，这些旅客不可能再坐上任何一趟地铁。
+\end{itemize}
+
+由于附件2中数据的明显错误，我们不可能使用附件2中的数据。取而代之，我们分析了附件2中数据的特点，并基于这些数据特征重新生成了若干组仿真模拟数据。并在生成的模拟数据上进行建模研究。
+
+我们在分析了附件2中数据的基础上，概括提炼出了如下的数据特征：
+
+\begin{itemize}
+  \item 每日客流约为10万人次，其中9月10日客流量最少为77984人次，9月7日客流量最多，为122495人次。
+  \item 出站高峰期在早上9时左右，出站客流量大约为2000人次每15分钟。
+  \item 进站高峰期在晚上18时左右，进站客流量大约为2500人次每15分钟。
+  \item 早上9时，1a-1e、2u站的进站客流量较大，大约在50-100人次每15分钟每站。
+  \item 晚上18时，1e、1f、1m、1p、1s、1t、2b-2i、2k、2q、2u站的进站客流量较大，大约在50-200人次每15分钟每站。
+  \item 早上9时，1m-1p、1s-1t、2b、2e-2k、2u站的出站客流量较大，大约在50-200人次每15分钟每站。
+  \item 晚上18时，1a-1b、1e-1f、1m、1p、2u站的出站客流量较大，大约在50-150人次每15分钟每站。
+  \item 从早上10时到晚上17时，1f、1m、1p、2q、2u站的出站客流量持续较大，大约在50-150人次每15分钟每站。
+\end{itemize}
+
+\subsubsection{客流量数据的生成模型}
+
+我们定义二维离散型的概率密度函数 $Q_{in}(t,s)$ 表示一名旅客在时刻 $t$ 从 $s$ 站进站的概率，同理用 $Q_{out}(t,s)$ 表示一名旅客在时刻 $t$ 从 $s$ 站进站的概率。其中 $t$ 的取值范围是区间 $[360,1320]$ 中的整数，$s$ 的取值范围为集合
+\[ S = \left\{ 1a,1b,\cdots,1t,2a,2b,\cdots,2x \right\} \]
+
+我们考虑 $Q_{in}(t,s)$ 和 $Q_{out}(t,s)$ 的边缘概率密度函数 (Marginal Probability Density Function)
+
+\begin{equation*}
+    R_{in}(t) = \sum_{s \in S} Q_{in}(t,s) \\
+    R_{out}(t) = \sum_{s \in S} Q_{out}(t,s)
+\end{equation*}
+
+$R_{in}(t)$ 和 $R_{out}(t)$ 反映了在 $t$ 时刻所有站点的进站概率和出站概率，是服从混合高斯分布的概率密度函数，其形式化定义如公式\ref{eq:p1_def-r}所示。
+
+\begin{equation}
+    R_{in}(t) = T \left( \max \left( \sum_i \alpha_i P_i(t;\mu_i,\sigma^2_i), c \right) \right) \\
+    R_{out}(t) = T \left( \max \left( \sum_i \alpha_i P_i(t;\mu_i,\sigma^2_i), c \right) \right)
+    \label{eq:p1_def-r}
+\end{equation}
+
+其中，$c$ 是一个介于0到1之间的小数，定义了每个时刻的最小概率。这样做的目的是，防止高斯分布的“$3-\sigma$原则”导致某些时刻的概率近乎于0。
+
+在 $t_0$ 时刻，$Q_{in}(t_0,s)$ 和 $Q_{out}(t_0,s)$ 反映了在 $t_0$ 时刻站点 $s$ 的进站概率和出站概率，也是服从混合高斯分布的概率密度函数，其形式化定义如公式\ref{eq:p1_def-q}所示。
+
+\begin{equation}
+    Q_{in}(t_0,s) = T \left( \max \left( \sum_i \alpha_i P_i(s;\mu_i,\sigma^2_i), c \right) \right) \\
+    Q_{out}(t_0,s) = T \left( \max \left( \sum_i \alpha_i P_i(s;\mu_i,\sigma^2_i), c \right) \right)
+    \label{eq:p1_def-q}
+\end{equation}
+
+\subsubsection{客流量数据的生成示例}
+
+\begin{table}[h]
+    \centering
+    \caption{每时刻进出站概率的高斯混合模型}
+    \label{tab:p1_gmm-time}
+    \begin{tabular}{c|c|cc|cc}
+        \hline
+        \multirow{2}{*}{时刻} & \multirow{2}{*}{$t$} & \multicolumn{2}{c|}{进站 GMM} & \multicolumn{2}{c}{出站 GMM} \\ \cline{3-6}
+                   &                        & 权重 & 高斯分布      & 权重 & 高斯分布      \\ \hline
+                   &                        & 0.4 & $P(t;8,0.5)$ & 0.4 & $P(t;8,0.5)$ \\
+        6时 - 22时 & $\left[360,1320\right]$ & 0.4 & $P(t;18,0.5)$ & 0.4 & $P(t;18,0.5)$ \\
+                   &                        & 0.2 & $P(t;21,0.2)$ & 0.2 & $P(t;21,0.2)$ \\ \hline
+    \end{tabular}
+\end{table}
+
+
 \subsubsection{***模型的建立}
 
 模型建立的内容要点如下：
@@ -275,7 +386,7 @@
 \textcolor{red}{将预处理数据带入上述模型，通过$\cdots$软件得到$\cdots$结果。（编程代码详见附件*）。模型求解及结果需要图文并茂，用数据说话  用图展示。具体步骤123$\cdots$}
 \begin{align}
 A_{\max}& =\dfrac{3600}{t_{\min}}=\dfrac{3600}{J_{\min} /(v / 3.6)}
-=\dfrac{1000 v}{J_{\min }}(\text{辆 } / h) \\
+=\dfrac{1000 v}{J_{\min }}(\text{1 } / h) \\
 J_{\min}& =J_{\rm r}+J_{z}+J_{\rm a}
 \end{align}
 
