@@ -32,7 +32,7 @@
 \colorlet{tableheadcolor}{gray!25} % Table header colour = 25% gray
 \newcommand{\headcol}{\rowcolor{tableheadcolor}}
 
-\title{\textcolor{red}{中小城市地铁运营与建设优化设计}}
+\title{中小城市地铁运营与建设优化设计}
 \date{}
 
 \usepackage{zhnumber} % change section number to chinese
@@ -53,15 +53,8 @@
         \input{Abstract}
 
         \begin{keywords}
-        {\song\xiaosihao
-        \textcolor{red}{使用到的模型名称、方法名称、特别是亮点一定要在关键字里出现，3 $\sim$ 5个较合适。}}
+        {\song\xiaosihao 交通规划、仿真模拟、高斯混合模型、最优化方法、最小二乘法}
         \end{keywords}
-
-        \begin{itemize}
-            \item \textcolor{blue}{前面一页必须使用模板格式（黑色部分），否则论文检测不通过。}
-            \item \textcolor{blue}{此页为论文开始处，论文正文用阿拉伯数字从“1”开始连续编号，页码位于每页页脚中部。（目录可加可不加）}
-        \end{itemize}
-
     \end{abstract}
     \maketitle
     \renewcommand{\contentsname}{\centerline{\sanhao\bfseries\HEI 目\quad 录}}
@@ -111,15 +104,16 @@
 
     综合运营成本和乘客的乘坐体验，我们需要给出合理的车厢节数和发车的时间间隔。
 
-        {2.建设新的线路选址在哪里？}
+    2.建设新的线路选址在哪里？
 
     当前的2号地铁线难以覆盖整个呼和浩特市，仅在一定程度上缓解了小部分的交通拥堵，并且人们并没有养成地铁出行的习惯，所以地铁处于亏损的状态。需要选择新的地点用于建设地铁，以及要求出可以让地铁盈利的乘坐人的数量。
 
-        {3.实现学生党和工作党的错峰出行，实现平峰目标该怎么做？}
+    3.实现学生党和工作党的错峰出行，实现平峰目标该怎么做？
 
-    考虑到疫情的特殊背景，我们需要对不同站点的学生和工作者进行出行时间设定，以满足疫情防控的需要以及平峰的目标，为乘客提供更好的乘车环境。
+    考虑到疫情的特殊背景，我们需要对不同站点的学生和工作者进行出行时间设定，以满足疫情防控的需要以及平峰的目标，为乘客提供更好的乘车环境。\cite{错峰出行}
 
-        {4.如何对公交新增线路，实现地铁公交更好的互补？}
+    4.如何对公交新增线路，实现地铁公交更好的互补？
+
     对于一个城市来说，交通系统下各交通工具应该是相辅相成为该市的居民服务的。所以在公交的基础上建造地铁，之后又要在地铁的基础上完善公交。
 
 
@@ -128,21 +122,14 @@
     \subsection{名词解释与说明}
     \begin{enumerate}
         \item \wordc{断面客流量：}在单位时间内，沿同一方向通过对到交通线路某断面你的乘客数量，即通过该断面你所在区间的客流量，分为上行断面客流量。
-
         \item \wordc{最大断面客流量：}在单位时间内，通过轨道交通线路各断面的客流量的最大值。
-
         \item \wordc{满载率：}反应车辆乘客满载程度的相对值，衡量车量利用程度的指标，可通过实际载客量与额定载客量之比求得。
-
         \item \wordc{乘客到达率：}乘客在某单位时刻在某一站点下车人数，单位通常为人/min。
         \item \wordc{地铁客运周转量：}乘客乘坐里程的总和。
-
-
     \end{enumerate}
 
     \subsection{主要符号与说明}
-
-%tab1
-    \begin{table}[h!]
+    \begin{table}[h]
         \centering
         \small
         \begin{tabular}{p{60pt}<{\centering}|p{60pt}<{\centering}p{180pt}<{\raggedright}}
@@ -161,7 +148,7 @@
             10          & $\eta_i$            & 第i量车辆的载客率                              \\
             11          & $W_i$               & 乘客要乘第i量车的等待时间                          \\
             12          & $K$                 & k取值为1-43，一号线二号线依次编号，1a为1,1t为20,2a为1... \\
-            13          & $\S$                & 所有站点指标的集合，如1a、2u。                      \\
+            13          & $S$                 & 所有站点指标的集合，如1a、2u。                      \\
             14          & $t$                 & 时间变量，从t=0为一天的开始                        \\
             15          & $Q_{in}(s,t)$       & 一名乘客在时刻t从s进站的概率                        \\
             16          & $Q_{out}(s,t)$      & 一名乘客在时刻t从s出站的概率                        \\
@@ -183,10 +170,8 @@
 
     \subsection{数据分析}
     \begin{figure}[h!t]
-        \centerline{\includegraphics[scale=0.4]{发车时间图}\quad
-        }
-        \caption{\song\wuhao
-        发车时间图}
+        \centerline{\includegraphics[scale=0.6]{figures/发车时间图}\quad}
+        \caption{\song\wuhao 发车时间图}
         \label{fig:发车时间图}
     \end{figure}
 
@@ -208,10 +193,8 @@
 
     \subsubsection{地铁客流随时间的分布研究}
     \begin{figure}[h!t]
-        \centerline{\includegraphics[scale=0.4]{客流图}\quad
-        }
-        \caption{\song\wuhao
-        客流量图}
+        \centerline{\includegraphics[scale=0.8]{figures/客流图}\quad }
+        \caption{\song\wuhao  客流量图}
         \label{fig:客流量}
     \end{figure}
 
@@ -261,7 +244,7 @@
     \subsection{问题二的分析}
     问题二需要根据呼和浩特的城市特点，提出合理的选址方案，让民众更加倾向于选择地铁这种出行方式，这样才能更大程度上缓解交通的拥堵情况。在这一部分，我们是以事实为依据，对于现实生活中实时路况信息进行调查，对于拥堵严重的地区，考虑用地铁缓解交通的压力。
     确定热点位置之后，通过最小二乘法确定路线，。
-    
+
     中国的城市轨道发展至今，地铁运营行业一直需要面对的课题就是：如何提高地铁运营企业的经济效益，如何降低运营成本，如何增加客票收入，实现“减亏”。
 
     通常意义下定义的地铁运营企业的收支平衡，是指剔除了还本付息、折扣和大修基金之后的相对平衡，也就是在考虑收支平衡的时候不考虑前期的成本。地铁的前期建造成本以亿为单位进行计算，如果考虑完全成本，那么地铁盈利是基本不可能的，所以我们也同样不考虑建设成本，只计算电费、维修、人工、管理和相关税费，与票价冲抵之后的平衡。
@@ -303,6 +286,8 @@
         \item 在考虑地铁的运营成本时，不考虑地铁的前期成本。
 
     \end{enumerate}
+
+
     \section{模型的建立与求解}
 
     \subsection{问题一的客流量模拟模型}
@@ -355,15 +340,19 @@
     我们考虑 $Q_{in}(t,s)$ 和 $Q_{out}(t,s)$ 的边缘概率密度函数 (Marginal Probability Density Function)
 
     \begin{equation*}
-        R_{in}(t) = \sum_{s \in S} Q_{in}(t,s) \\
-        R_{out}(t) = \sum_{s \in S} Q_{out}(t,s)
+        \begin{aligned}
+            R_{in}(t) = \sum_{s \in S} Q_{in}(t,s) \\
+            R_{out}(t) = \sum_{s \in S} Q_{out}(t,s)
+        \end{aligned}
     \end{equation*}
 
     $R_{in}(t)$ 和 $R_{out}(t)$ 反映了在 $t$ 时刻所有站点的进站概率和出站概率，是服从混合高斯分布的概率密度函数，其形式化定义如公式\ref{eq:p1_def-r}所示。
 
     \begin{equation}
-        R_{in}(t) = T \left( \max \left( \sum_i \alpha_i P_i(t;\mu_i,\sigma^2_i), c \right) \right) \\
-        R_{out}(t) = T \left( \max \left( \sum_i \alpha_i P_i(t;\mu_i,\sigma^2_i), c \right) \right)
+        \begin{aligned}
+            R_{in}(t) = T \left( \max \left( \sum_i \alpha_i P_i(t;\mu_i,\sigma^2_i), c \right) \right) \\
+            R_{out}(t) = T \left( \max \left( \sum_i \alpha_i P_i(t;\mu_i,\sigma^2_i), c \right) \right)
+        \end{aligned}
         \label{eq:p1_def-r}
     \end{equation}
 
@@ -372,8 +361,10 @@
     在 $t_0$ 时刻，$Q_{in}(t_0,s)$ 和 $Q_{out}(t_0,s)$ 反映了在 $t_0$ 时刻站点 $s$ 的进站概率和出站概率，也是服从混合高斯分布的概率密度函数，其形式化定义如公式\ref{eq:p1_def-q}所示。
 
     \begin{equation}
-        Q_{in}(t_0,s) = T \left( \max \left( \sum_i \alpha_i P_i(s;\mu_i,\sigma^2_i), c \right) \right) \\
-        Q_{out}(t_0,s) = T \left( \max \left( \sum_i \alpha_i P_i(s;\mu_i,\sigma^2_i), c \right) \right)
+        \begin{aligned}
+            Q_{in}(t_0,s) = T \left( \max \left( \sum_i \alpha_i P_i(s;\mu_i,\sigma^2_i), c \right) \right) \\
+            Q_{out}(t_0,s) = T \left( \max \left( \sum_i \alpha_i P_i(s;\mu_i,\sigma^2_i), c \right) \right)
+        \end{aligned}
         \label{eq:p1_def-q}
     \end{equation}
 
@@ -412,13 +403,7 @@
         \end{tabular}
     \end{table}
 
-    根据表\ref{tab:p1_gmm-time}和表\ref{tab:p1_gmm-station}的高斯混合模型，我们计算出每时刻每站点进出站的概率，其热力图如图\ref{fig:p1_heatmap}所示。
-
-    \begin{figure}[h]
-        \centerline{\includegraphics[scale=0.4]{figures/fig1}\quad}
-        \caption{\song\wuhao 每时刻每站点进出站的概率热力图}
-        \label{fig:p1_heatmap}
-    \end{figure}
+    根据表\ref{tab:p1_gmm-time}和表\ref{tab:p1_gmm-station}的高斯混合模型，我们计算出每时刻每站点进出站的概率。
 
     我们按照如下步骤生成模拟数据：
 
@@ -441,7 +426,7 @@
         \item 时刻 $t$ 加一，跳回步骤2，直到所有列车结束；
     \end{enumerate}
 
-    我们使用最大断面客流量确定最大车厢数，最大断面客流量的定义如公式\ref{eq:p1_def-max-flow}所示。最大断面客流量的含义是，所有列车在所有时刻的运行过程中，某列车某时刻的车载人数的最大值。
+    我们使用最大断面客流量确定最大车厢数，最大断面客流量的定义如公式\ref{eq:p1_def-max-flow}所示。最大断面客流量的含义是，所有列车在所有时刻的运行过程中，某列车某时刻的车载人数的最大值。\cite{断面客流}
 
     \begin{equation}
         W = \max_{r,t} R(r,t)
@@ -491,7 +476,7 @@
             18时30分 - 19时 & 5 分钟/趟  \\
             19时 - 20时    & 8 分钟/趟  \\
             20时 - 21时    & 10 分钟/趟 \\
-            21时 - 22时    & 15 分钟/趟 \\
+            21时 - 22时    & 15 分钟/趟 \\ \hline
         \end{tabular}
     \end{table}
 
@@ -500,31 +485,26 @@
 
     \subsubsection{限制条件的推导}
     \begin{figure}[h!t]
-        \centerline{\includegraphics[scale=0.6]{呼市地图}\quad
-        }
-        \caption{\song\wuhao
-        呼市地图}
+        \centerline{\includegraphics[scale=0.6]{figures/呼市地图}\quad}
+        \caption{\song\wuhao 呼市地图}
         \label{fig:呼市地图}
     \end{figure}
     首先对该地区进行总体分析，下图 \ref{fig:呼市地图}为该地区地图，通过对地图上主要交通路线分布情况呼和浩特主要交通路线聚集在城市中部以及西北方向。
     \begin{figure}[h!t]
-        \centerline{\includegraphics[scale=0.6]{城市热力图}\quad
-        }
-        \caption{\song\wuhao
-        城市热力图}
+        \centerline{\includegraphics[scale=0.6]{figures/城市热力图}\quad}
+        \caption{\song\wuhao 城市热力图}
         \label{fig:城市热力图}
     \end{figure}
+
     如下 \ref{fig:城市热力图}为城市热力图，可以在一定程度上影响该市的交通状况，颜色越深的地方越有可能人员聚集，距离中心较远区域地广人稀，且自然山脉地形限制，暂不考虑将地铁延拓到这类相关区域。市区人员出行人流、车流量最大一般在市中心，副中心，居民区，工业区等。
+
     \begin{figure}[h!t]
-        \centerline{\includegraphics[scale=1]{拥堵图}\quad
-        }
-        \caption{\song\wuhao
-        拥堵图}
+        \centerline{\includegraphics[scale=1]{figures/拥堵图}\quad}
+        \caption{\song\wuhao 拥堵图}
         \label{fig:拥堵图}
     \end{figure}
 
-
-    通过实时监测路况拥堵程度，提取地面车辆密度信息。如下图 \ref{fig:拥堵图}，是以兴茂家园附近路线为例，其中绿色到黄色再到红色分别表明畅通到拥挤不同程度的路况。由于本文旨在缓解交通压力，减少碳排放，因此地面车辆密度的高低可以很好的反应相关信息。通过对路况信息的监控，拥堵区域集中在小区、学校、大型市场附近。
+    通过实时监测路况拥堵程度，提取地面车辆密度信息。如下图\ref{fig:拥堵图}，是以兴茂家园附近路线为例，其中绿色到黄色再到红色分别表明畅通到拥挤不同程度的路况。由于本文旨在缓解交通压力，减少碳排放，因此地面车辆密度的高低可以很好的反应相关信息。通过对路况信息的监控，拥堵区域集中在小区、学校、大型市场附近。
 
     综上所述，我们可以大致给出关于地铁三号线的建设的初步考虑：1.穿过城市中心。2.为缓解地面交通压力，要在尽可能多的途径拥堵路段或其附近区域。3.由于建造维护成本高，暂不考虑覆盖偏远地区。
 
@@ -555,22 +535,23 @@
 
 
     \begin{figure}[h!t]
-        \centerline{\includegraphics[scale=1]{选址散点图}\quad
-        }
-        \caption{\song\wuhao
-        选址散点图}
+        \centerline{\includegraphics[scale=0.6]{figures/选址散点图}\quad}
+        \caption{\song\wuhao 选址散点图}
         \label{fig:选址散点图}
     \end{figure}
 
     3.模糊规划
     为简化计算，文中通过经纬度信息近似距离信息，假设在平面直角坐标系下，该信息依旧有较高的参考价值。其中蓝色代表现有1/2号线对应站点红色代表待分流拥堵点 \ref{fig:选址散点图}。
+
     (1)直接拟合
     从图中可以看到标出的点（出去左上角的点）呈现明显的圆环趋势，因此考虑直接拟合环形地铁，但这类地铁制造、维护成本较高，在接下来尝试是否有更加接近直线的地铁建造方案。
+
     (2)线性规划
     在考虑近似直线地铁建造规划时，首先想到利用最小二乘法进行线性回归。这种方法可以拟合出一条直线到各散点的距离差平方和最小。
     但是这种方法的弊端在于使得各个点所含的信息量相同，与实际情况出入较大。我们应该考虑尽可能地接近人流量大的拟合点，为了优化现有的线性规划模型，我们考虑在进行最小二乘法距离求和时，给每个点的距离平方引入权重系数。
-    权重的确定采用打分系统，80%由交通拥堵程度M决定，20%由周边建筑信息N决定。
+    权重的确定采用打分系统，80\%由交通拥堵程度M决定，20\%由周边建筑信息N决定。
     M的确定：在监控24小时路况时，针对每小时拥堵情况进行累加。
+
     \begin{table}
         \centering
         \begin{tabular}{|l|l|l|l|}
@@ -584,6 +565,7 @@
             W_i=0.8*M_i/(sum(M_i))+0.2*N_i/(sum(N_i))
         \end{aligned}
     \end{equation}
+
     4.实际规划
     上部分线路的确定仅是提供模糊规划方案，实际线路确定应当围绕所给直线结合实际地形、地质等多方面因素综合考虑。由于信息有限，这里仅提供建议。
     (1)    互补原则：和现有机动车快速干道没有长距离重复
@@ -591,7 +573,7 @@
     等等
 
     \subsubsection{考虑地铁运营收益}
-    我们把整跳线路上的点转化为1-43的数字，根据轨道交通的特性，i到i+1站点间的断面总客流量为$Q_{i}{i+1}$,是每一个站点断面数据之和。此处我们只考虑一号线，二号线同理，即取值点为1-20.
+    我们把整跳线路上的点转化为1-43的数字，根据轨道交通的特性，i到i+1站点间的断面总客流量为$Q_{i}{i+1}$,是每一个站点断面数据之和。此处我们只考虑一号线，二号线同理，即取值点为1-20.\cite{运营收益}
     \begin{equation}
         \begin{aligned}
             Q_{i,i+1}=\sum_{m=1}^{i}\sum_{n=i+1}^{s}q_{m,n}(1\leqslant i\leqslant s-1)
@@ -625,87 +607,92 @@
     \end{equation}
 
     参考\cite{运营计划}运营成本我们考虑人工成本与电力成本两个方面，这两个变量均当日的班次数量有关。当日发车次数为N，当日的行驶总里程是$L*M$，电力成本系数为k元/公里。人员成本数据应为一个确定的已知的数据，记为$s_0$,不同数量的乘客对应车辆有不同程度的损耗，那么在这种情况下我们引入一个列车周转量的变量$\sum_{m=1}^{s-1}\sum_{n=2}^{s}(q_{m,n}L_{m,n}+q_{n,m}L_{m,n})$
-    上下行两个方向的运营成本记为$F_cost=f_2(L*M，\sum_{m=1}^{s-1}\sum_{n=2}^{s}(q_{m,n}L_{m,n}+q_{n,m}L_{m,n}),s_0)$
+    上下行两个方向的运营成本记为$F_{cost}=f_2(L*M,\sum_{m=1}^{s-1}\sum_{n=2}^{s}(q_{m,n}L_{m,n}+q_{n,m}L_{m,n}),s_0)$
 
+    \subsection{问题三的求解和分析}
 
-    \subsection{问题 三的求解和分析 的求解和分析 的求解和分析}
+    可以用(起始节点,目的节点)表示一条出行轨迹，放入新集合中。为简化计算可以将终节点到达时间视作上班时间，中间经过此时问题变为在已知起点、终点节点坐标以及路程中间经过的所有路段条件下，调节到达时间，使得各个节点流量每个时间控制在相对稳定的情况下。
 
-    \subsubsection{对问题的分析}
+    $x_{a}^{pq}$:乘客x的起始乘车点为p点，终止点是q,到达时间为a
 
-    问题 三我们参考\cite{错峰出行}。
+    \begin{eqnarray}
+        I_{tu}(x_{a}^{pq}) & = & \left\{\begin{matrix}
+                                            0& t时刻乘客x不在地铁u上 \\
+                                            1& t时刻乘客x在地铁u上
+        \end{matrix}\right.
+    \end{eqnarray}
 
-    \subsubsection{对问题的求解}
+    可通过列车的进出站点以及进出站时间，以及乘客刷卡乘车进出站节点与时间求出每个x对应的不同他t,u下示性函数的值。
+
+    此时目标函数变为
+    \begin{align}
+        \min_{t,u}\max_{i} \sum_{x} I_{t}(x_{a}^{pq})
+    \end{align}
+
+    该模型的限制条件在于对a的调整，a每次调整的幅度$\Delta _{t}$为发车间隔，由于此时为高峰时间段，所以$\Delta _{t}$均为6分钟。本文建议采用贪心算法把所有合理可调整的变化大小进行遍历，最终可求得各个点最优解。
+
+    \begin{table}[h]
+        \centering
+        \caption{列车发车时刻与到站点对应表}
+        \label{tab:p4_timetable}
+        \begin{tabular}{c|ccccccccc}
+            \hline
+            发车时间 & 6:30 & 6:40 & 6:50 & 7:00 & 7:06 & 7:12 & 7:18 & 7:24 & 7:30 \\ \hline
+            到站节点 & 1j   & 2a   & 1c   & 1g   & 1i   & 1l   & 2o   & 2e   & 2b   \\
+            & 2p   &      & 1m   & 1r   & 2c   & 2t   &      & 2i   &      \\
+            &      &      & 2w   &      &      &      &      &      &      \\ \hline
+            发车时间 & 7:36 & 7:42 & 7:48 & 7:54 & 8:00 & 8:06 & 8:12 & 8:18 & 8:24 \\
+            到站节点 & 1e   & 2j   & 1b   & 1o   & 1k   & 1d   & 2d   & 2f   & 1h   \\
+            & 2u   &      & 1f   &      &      &      & 2l   & 2v   &      \\ \hline
+            发车时间 & 8:30 & 8:36 & 8:42 & 8:48 & 8:54 & 9:00 & 9:10 & 9:20 & 9:30 \\
+            到站节点 & 1a   & 1s   & 1n   & 1p   & 2h   & 2k   & 2q   & 2g   & 1t   \\
+            & 1q   & 2r   &      & 2n   &      &      & 2s   & 2m   &      \\
+            &      &      &      & 2x   &      &      &      &      &      \\ \hline
+        \end{tabular}
+    \end{table}
+
+    \subsection{问题四的求解和分析}
+
+    在充分考虑呼和浩特市城市快速路的基础之上，你能否提出一个地铁和公交互补的若干新增公交线路，以满足更多人员高峰出行时期的出行效率
 
 
     \section{模型的评价与推广 模型的评价与推广}
+    1.问题分析：
 
-    \textcolor{red}{将模型进行数值计算，并与附件中的真实采样值（进行列表或图示）比较。对误差进行数据分析，给出误差分析的理论估计。}
+    将模型进行数值计算，并与附件中的真实采样值（进行列表或图示）比较。对误差进行数据分析，给出误差分析的理论估计。在地面路况监控的过程中，我们发现在距离城区较远的地方也会存在拥堵情况，此时建造地铁成本较大，因此考虑利用灵活的公交线路对地铁未抵达区域进行互补。由于城市快速路主要位于呼和浩特市的中部偏东北部，因此考虑在西南部地区安排公交线路。
 
-    \subsection{模型的评价}
+    2.建造原则
 
+    在确定公交线路是需要遵循如下步骤：
 
-    1. 优点
+    STEP1：确定带规划区域大致范围，标出主要出行线路和道路等级。
 
-    \textcolor{red}{得到满意的解、
-    较好地解决了$\cdots$问题、
-    使模型得到简化、
-    使结果更合理，避免…带来的较大误差、
-    使问题描述比较清晰、
-    减少大的计算量。}
+    STEP2：计算周围居民每天出行量与公交乘车出行意愿，在此基础上确定公交为环线或双向单线。
 
+    STEP3：找到最优最大覆盖公交路径，极大化公交居民出行意愿。
 
 
-    \begin{figure}[h!t]
-        \centerline{\includegraphics[scale=0.8]{fig4.pdf}}
-        \caption{\song\wuhao 图~3的标题名称}
-    \end{figure}
+    此外还要注意如下细节：
 
+    (1)线路长度适中，停靠站点数量合理
 
-    （4）运用多种数学软件（如 MATLAB、SPSS），取长补短，使计算结果更加），取长补短，使计算结果更
-    加 准确、明晰．
+    (2)做好与主干线的衔接，提供更多的换乘可能性
 
-    2. 缺点
+    (3)结合周边环境、自然进行规划设计
 
-    \textcolor{red}{主观性过强、
-    建立在什么的前提条件下、
-    有一定的局限性、
-    存在不确定性、
-    有一定的偏差。
-    }
-    ．
+    3.总结反思
 
-    \subsection{模型的、模型的 推广}
-
-    \begin{itemize}
-
-        \item \textcolor{red}{对本文中的模型给出比较客观的评价，必须实事求是，有根据，以便评卷人参考。}
-
-        \item \textcolor{red}{推广和优化，需要花费功夫想出合理的、甚至可以合理改变题目给出的条件的、不一定可行但是具有一定想象空间的准理想的方法、模型。由此做出一些改进方向，也可以是参赛者一些来不及实现的思路。}
-    \end{itemize}
-
-    ．
+    在实际情况中，公交选线一般将提案与实际情况相结合，按照经验与试运营情况权衡出合适的线路。关注城市的发展，与客流数据的动态变化，找到合适的方案。
 
 
     \section{模型的改进}
 
-    \subsection{模型一的改进}
-
-    \subsection{模型二的改进}
-    三．反思与不足
-    1.实际情况反思
-    在现有地铁经过的站点附近1km为半径的环形区域内，路面交通情况依旧不容乐观，存在着较多时段的拥堵，人们在选择出行方式时，更偏好于地面交通。因此在可以考虑进行低碳出行宣传，以及制定相关政策，对地铁出行方式的偏斜。以便更好地缓解交通压力和碳排放。
+    1.实际情况反思。在现有地铁经过的站点附近1km为半径的环形区域内，路面交通情况依旧不容乐观，存在着较多时段的拥堵，人们在选择出行方式时，更偏好于地面交通。因此在可以考虑进行低碳出行宣传，以及制定相关政策，对地铁出行方式的偏斜。以便更好地缓解交通压力和碳排放。
 
     2.在相关数据的采集方面可以更加完善，在站点设置上可以通过调查问卷方式了解当地居民的看法，合理化地铁规划。同时可以对不同区域进行细分，基于更多的信息考虑各个区域的权重。
 
-    \textcolor[rgb]{0.98,0.00,0.00}{\textbf{程序二：C++ 求解路网正体影响度:}}
-    \lstinputlisting[language=C++]{./code/mcmthesis-sudoku.cpp}
-
     \newpage
-    \setcounter{table}{0}
-    \section*{数据表格}
-    \textcolor[rgb]{0.98,0.00,0.00}{\textbf{表格数据：}}
-    \input{Appendices1}
-\newpage
-\bibliographystyle{acm}
-\bibliography{bibliography/references}
+    \bibliographystyle{acm}
+    \bibliography{bibliography/references}
+
 \end{document}
