@@ -1,7 +1,5 @@
-
 \documentclass[12pt,a4paper]{mcmthesis}
 \usepackage{ctex}
-\usepackage{lipsum}
 \usepackage{graphicx}
 \usepackage{booktabs,colortbl}
 \usepackage{xcolor}
@@ -16,6 +14,7 @@
 \usepackage{cite}
 \usepackage{amsmath}
 \usepackage{paralist}
+
 \let\itemize\compactitem
 \let\enditemize\endcompactitem
 \let\enumerate\compactenum
@@ -50,25 +49,25 @@
 \makeatother
 
 \begin{document}
-\begin{abstract}
-\input{Abstract}
+    \begin{abstract}
+        \input{Abstract}
 
-\begin{keywords}
-{\song\xiaosihao
-\textcolor{red}{使用到的模型名称、方法名称、特别是亮点一定要在关键字里出现，3$\sim$ 5个较合适。}}
-\end{keywords}
+        \begin{keywords}
+        {\song\xiaosihao
+        \textcolor{red}{使用到的模型名称、方法名称、特别是亮点一定要在关键字里出现，3 $\sim$ 5个较合适。}}
+        \end{keywords}
 
-\begin{itemize}
-  \item \textcolor{blue}{前面一页必须使用模板格式（黑色部分），否则论文检测不通过。}
-  \item \textcolor{blue}{此页为论文开始处，论文正文用阿拉伯数字从“1”开始连续编号，页码位于每页页脚中部。（目录可加可不加）}
-\end{itemize}
+        \begin{itemize}
+            \item \textcolor{blue}{前面一页必须使用模板格式（黑色部分），否则论文检测不通过。}
+            \item \textcolor{blue}{此页为论文开始处，论文正文用阿拉伯数字从“1”开始连续编号，页码位于每页页脚中部。（目录可加可不加）}
+        \end{itemize}
 
-\end{abstract}
-\maketitle
-\renewcommand{\contentsname}{\centerline{\sanhao\bfseries\HEI 目\quad 录}}
+    \end{abstract}
+    \maketitle
+    \renewcommand{\contentsname}{\centerline{\sanhao\bfseries\HEI 目\quad 录}}
 %\thispagestyle{empty}
 %{\song\xiaosihao
-\tableofcontents
+    \tableofcontents
 %}
 
 \newpage
@@ -80,7 +79,7 @@
 \subsection{要解决的具体问题}
 
    1.当前的地铁运营是否合理？
-  
+
   \begin{table}
   	\centering
   	\begin{tabular}{|l|l|l|l|l|l|}
@@ -91,7 +90,7 @@
   	\caption{基础信息表}
   	\label{tab:基础信息表}
   \end{table}
-  
+
    \begin{table}
   	\centering
   	\begin{tabular}{|l|l|l|}
@@ -100,23 +99,23 @@
   		工作日 & 7:00-9:00 & 17:00-19:00 \\ \hline
   		节假日 & 9:00-11:00 & 16:00-18:00 \\ \hline
   	\end{tabular}
-  	\caption{早晚高峰时间表} 
+  	\caption{早晚高峰时间表}
   	\label{tab:早晚高峰}
   \end{table}
 
 
  呼和浩特市地铁的基本信息如表 \ref{tab:基础信息表}，错峰发车的时间间隔如 \ref{tab:基础信息表}所示，考察网络数据和所给数据不难发现，尽管在官方报道的客流量数据中，地铁客流量在逐渐增加，2020年12月6日，地铁客运量达到了17万人次，但是每天单向会发出100次，粗略的平均每列地铁的人次在400左右，载客率过低，也导致亏损十分严重。
 
-综合运营成本和乘客的乘坐体验，我们需要给出合理的车厢节数和发车的时间间隔。 
+综合运营成本和乘客的乘坐体验，我们需要给出合理的车厢节数和发车的时间间隔。
 
 {2.建设新的线路选址在哪里？}
-  
+
 当前的2号地铁线难以覆盖整个呼和浩特市，仅在一定程度上缓解了小部分的交通拥堵，并且人们并没有养成地铁出行的习惯，所以地铁处于亏损的状态。需要选择新的地点用于建设地铁，以及要求出可以让地铁盈利的乘坐人的数量。
- 
+
   {3.实现学生党和工作党的错峰出行，实现平峰目标该怎么做？}
-  
+
 考虑到疫情的特殊背景，我们需要对不同站点的学生和工作者进行出行时间设定，以满足疫情防控的需要以及平峰的目标，为乘客提供更好的乘车环境。
-  
+
   {4.如何对公交新增线路，实现地铁公交更好的互补？}
   对于一个城市来说，交通系统下各交通工具应该是相辅相成为该市的居民服务的。所以在公交的基础上建造地铁，之后又要在地铁的基础上完善公交。
 
@@ -128,17 +127,17 @@
 \subsection{名词解释与说明}
 \begin{enumerate}
 	\item \wordc{断面客流量：}在单位时间内，沿同一方向通过对到交通线路某断面你的乘客数量，即通过该断面你所在区间的客流量，分为上行断面客流量。
-	
+
 	\item \wordc{最大断面客流量：}在单位时间内，通过轨道交通线路各断面的客流量的最大值。
-	
+
 	\item \wordc{满载率：}反应车辆乘客满载程度的相对值，衡量车量利用程度的指标，可通过实际载客量与额定载客量之比求得。
-	
+
 	\item \wordc{乘客到达率：}乘客在某单位时刻在某一站点下车人数，单位通常为人/min。
 	\item \wordc{地铁客运周转量：}乘客乘坐里程的总和。
-	
 
-	
-	
+
+
+
 \end{enumerate}
 \subsection{主要符号与说明}
 
@@ -166,7 +165,7 @@
 		14 & $t$ &时间变量，从t=0为一天的开始\\
 		15 &$Q_{in}(s,t)$&一名乘客在时刻t从s进站的概率\\
 		16 &$Q_{out}(s,t)$&一名乘客在时刻t从s出站的概率\\
-		17 &$L_i$& i={1,2}地铁线路的总长度，$L_1$,$L_2$\\		
+		17 &$L_i$& i={1,2}地铁线路的总长度，$L_1$,$L_2$\\
 		18 &$Z_i$& i={1,2}地铁i号线客运周转量\\
 		$\cdots$ & $\cdots$ \\
 		\hline
@@ -200,11 +199,11 @@
 此处我们引入一个转移矩阵$X_{ij}$，是由$x_{ij}$组成的，代表一名乘客从i站点上课，从j站点下车的概率。从i站出发到达i站的可能性我们记为0，矩阵每行每列各概率值相加均为零，代表着从某一站上车一定会从某一站下车。
 \begin{equation}
 \begin{bmatrix}
-	0 &x_{12}  &x_{13} &... & x_{1n}\\ 
-	x_{21} &0  &x_{23} & ... &x_{2n} \\ 
-	x_{31} & x_{32} &0 & ...&x_{3n} \\ 
+	0 &x_{12}  &x_{13} &... & x_{1n}\\
+	x_{21} &0  &x_{23} & ... &x_{2n} \\
+	x_{31} & x_{32} &0 & ...&x_{3n} \\
 	...&  ... &   ...&  ... &...\\
-	x_{n1} & x_{n2} &x_{n3} &... &0 
+	x_{n1} & x_{n2} &x_{n3} &... &0
 \end{bmatrix}
 \end{equation}
 转移矩阵的数据可以由实际的运行的闸机数据获得，此处只能根据到站数据占总数据的比，来推测每个站点的热度最为权重，视作转移概率。对于进站的数据(非端点站)，认为其有0.5的概率向两个相反的方向。
@@ -250,15 +249,15 @@
 \subsection{问题一的分析}
 
  通过前面对于数据的初步观察，可以看出目前的运营模式下有几点不太贴合现实情况，所以我们初步可以认定目前发车方案的不合理。
- 
+
  1.数据不合理需要重新进行仿真。
  2.当前的高峰平峰时间的划分不合理，需要用Fisher聚类重新划分。
- 
+
  在结局这两个问题的基础上进行车厢节数的划分和发车间隔的确定。
 
- 
- 
- 
+
+
+
  {问题一首先需要对数据进行简单地处理，对于通过数据可以得出的结论进行总结和讨论。然后通过数据来推测最优车厢节数，以及最优发车间隔。最优车厢节数的推算，需要用到最大断面流量。最大断面流量的获得先需要对客流特征进行提取，建立客流到达率函数。通过到到达率函数用Fisher有序样本聚类分析，得到客流量高峰、低峰和平峰，用于错峰发车，划分调动时段。最后考虑乘客的等车时间成本和车辆的利用率用遗传算法确定发车间隔。再通过混合高斯模型进行数据的仿真，对模型进行检测。}
 
 
@@ -268,7 +267,7 @@
 
 {问题二同样包含一个地铁运营的盈利边界问题。这里会涉及到地铁运营成本模型，考虑的现金的时间价值问题。}
 {中国的城市轨道发展至今，地铁运营行业一直需要面对的课题就是：如何提高地铁运营企业的经济效益，如何降低运营成本，如何增加客票收入，实现“减亏”。
-	
+
 通常意义下定义的地铁运营企业的收支平衡，是指剔除了还本付息、折扣和大修基金之后的相对平衡，也就是在考虑收支平衡的时候不考虑前期的成本。在（地铁成本运营分析中）有写地铁的完全成本，包括建设成本，营业支出（包括地铁在运营期内发生的运营成本）其他三项支出（折旧、计提大修基金和利息）。
 
 地铁的前期建造成本以亿为单位进行计算，如果考虑完全成本，那么地铁盈利是基本不可能的，所以我们也同样不考虑建设成本，只计算电费、维修、人工、管理和相关税费，与票价冲抵之后的平衡。}
@@ -398,7 +397,9 @@ $R_{in}(t)$ 和 $R_{out}(t)$ 反映了在 $t$ 时刻所有站点的进站概率�
 	\label{eq:p1_def-q}
 \end{equation}
 
-\subsubsection{客流量数据的生成示例}
+    \subsubsection{客流量数据的生成过程}
+
+        我们构建每时刻进出站概率的高斯混合模型，如表\ref{tab:p1_gmm-time}所示，每个站点进出站概率的高斯混合模型，如表\ref{tab:p1_gmm-station}所示。
 
 \begin{table}[h]
 	\centering
@@ -413,62 +414,104 @@ $R_{in}(t)$ 和 $R_{out}(t)$ 反映了在 $t$ 时刻所有站点的进站概率�
 		&                        & 0.2 & $P(t;21,0.2)$ & 0.2 & $P(t;21,0.2)$ \\ \hline
 	\end{tabular}
 \end{table}
-\textcolor{red}{这里可能需要一个模拟后的图}
 
-\subsubsection{行车间隔优化模型的建立}
-由于实际的客流量峰值与目前地铁所采用的峰值不同，所以我们通过模拟的客流量数据，先对峰值进行优化，这一步的目的划分高峰平峰低峰时段。
-我们首先引入乘客到达率这个变量。
-第i量地铁到达第j站的时间为$t_i^j$,则地铁单向到达的时刻表为$t_1^j，t_2^j...t_N^j$,下车的人数为$F(\Delta t_i^j)$,乘客到达率为:
-\begin{equation}
-	\begin{aligned}
-		f_0(\Delta t_i^j)=\frac{F(\Delta t_i^j)}{\Delta t_i^j}
-	\end{aligned}
-\end{equation}
-将各站的到达率数据平移到出发站，这样通过如下的计算得到乘客到达率曲线。
-\begin{equation}
-	\begin{aligned}
-		f(t)=\sum_{j=1}^{M}(f_j(t-t_0^j))
-	\end{aligned}
-\end{equation}
-以步长为$\Delta l$为时间刻度(在本题中我们选取的是15分钟取样一次)，将一天内的发车总时长等分，则有刻度0，$\Delta l$，$\Delta 2l$...对应的乘客到达率为$f(\Delta l)$,...,$f(\Delta kl)$...
+        \begin{table}[h]
+            \centering
+            \caption{每个站点进出站概率的高斯混合模型}
+            \label{tab:p1_gmm-station}
+            \begin{tabular}{c|c|cc|cc|cc}
+                \hline
+                \multirow{2}{*}{时刻} & \multirow{2}{*}{$t$} & \multicolumn{2}{c|}{特别热点站 GMM} & \multicolumn{2}{c}{热点站 GMM} & \multicolumn{2}{c}{普通站 GMM} \\ \cline{3-6}
+                &                                    & 权重  & 高斯分布     & 权重  & 高斯分布     & 权重  & 高斯分布   \\ \hline
+                6时 - 14时  & $\left[360,840\right]$ & 0.7 & $P(t;8,0.5)$  & 0.6 & $P(t;8,1)$ & 0.5 & $P(t;8,2)$ \\
+                           &                        & 0.3 & $P(t;10,0.5)$  & 0.4 & $P(t;10,1)$ & 0.5 & $P(t;10,2)$ \\
+                14时 - 22时 & $\left[840,1320\right]$ & 0.7 & $P(t;18,0.5)$ & 0.6 & $P(t;18,1)$  & 0.5 & $P(t;18,2)$ \\
+                           &                         & 0.3 & $P(t;21,0.5)$ & 0.4 & $P(t;21,1)$  & 0.5 & $P(t;21,2)$ \\ \hline
+            \end{tabular}
+        \end{table}
 
-各时刻的乘客到达率组成一维有序样本，为了方便，将$f(k\Delta l)$记为$f_k$.按照某一划分规则，将其划分为$P(k,s):\left \{ {f_{i_1},f_{i_1+1}...f_{i_2}} \right \}$，然后分析这些类别之间的相似度。
+        根据表\ref{tab:p1_gmm-time}和表\ref{tab:p1_gmm-station}的高斯混合模型，我们计算出每时刻每站点进出站的概率，其热力图如图\ref{fig:p1_heatmap}所示。
 
-首先定义类$P(k,s):\left \{ {f_{i_1},f_{i_1+1}...f_{i_2}} \right \}$的相似度S(i):
-\begin{equation}
-	S(i)=\sqrt{\frac{\sum_{i\leq l\leq{j-1} }\left ( f_l-\bar{f_i} \right )^2}{j-i}}
-\end{equation}
-$S(i)$越小相似度越高。
-下面定义相邻两类${f_i,f_{i+1},...f_{j_1}},{f_j,f_{j+1},...f{j-1}}的距离$
-\begin{equation}
-	D(i,j)=\left | \bar{f_j}-\bar{f_i} \right |
-\end{equation}
-由此可见，D(i,j)越大，类之间的差异性越大。
+        \begin{figure}[h]
+            \centerline{\includegraphics[scale=0.4]{figures/fig1}\quad}
+            \caption{\song\wuhao 每时刻每站点进出站的概率热力图}
+            \label{fig:p1_heatmap}
+        \end{figure}
 
-继而定义分类P(K,s)的误差函数：
-\begin{equation}
-	\begin{aligned}
-	e(P(K,s))=
-	\begin{cases}
-		\sqrt{\frac{\sum (f_l-\bar f)^2}{K}} & \text{ if } s=1 \\ 
-		\frac{(s-1)\cdot \sum_{i=1}^{s}S(i)}{s\cdot \sum_{l=1}^{s-1}D(i_l,i_{l+1})}& \text{ if } s\geq 2 \\ 
-	\end{cases}
-    \end{aligned}
-\end{equation}
-建立聚类优化模型：
-\begin{equation}
-	\begin{aligned}`
-		min \quad e(P(K,s))\\
-		s.t. \quad s \geqslant s_0
-	\end{aligned}
-\end{equation}
+        我们按照如下步骤生成模拟数据：
 
-此处我们认为分类模型不少于两个，即为高峰和平峰期。
+        \begin{enumerate}
+            \item 根据图\ref{fig:p1_heatmap}中的概率选择一个单元格，记为 $(t,s_f)$，表示旅客在时刻 $t$ 从站点 $s_f$ 进站；
+            \item 根据时刻 $t$ 的概率（图\ref{fig:p1_heatmap}中时刻 $t$ 的那一行）选择一个单元格，记为 $s_t$，表示旅客想要前往站点 $s_t$；
+        \end{enumerate}
 
-\subsubsection{行车间隔优化模型的求解}
-当前的地铁空载率很高，观察所给的数据不难看出，最大断面客流量在2500人每15分钟，在高峰时段，15分钟内至少有4辆车正在运营，平均下来每辆车有600人左右，与每辆地铁的最大承载量2400相比，只有25\%的负载量。尽管依照乘客的空间感受十分良好，但也十足浪费资源。
+        于是，我们得到了一个形如 $(t,s_f,s_t)$ 的元组，表示一名旅客在时刻 $t$ 从站点 $s_f$ 进站，前往站点 $s_t$ 。由于每日的客流量约为10万人次，因此我们生成10万条左右这样的元组，以模拟地铁一天的运行情况。
 
-\subsubsection{结果分析}
+    \subsubsection{最优车厢数量的求解}
+
+        我们根据模拟数据，使用 Python 程序实时模拟地铁一天的运行情况，具体的模拟过程如下：
+
+        \begin{enumerate}
+            \item 确定一天所有列车的发车时刻；
+            \item 在时刻 $t$，将所有站点上车的旅客加入每个站点的等待队列 $L(s,up)$ 或 $L(s,down)$ 中，两个等待队列分别代表上行和下行两个方向；
+            \item 在时刻 $t$，更新所有列车状态；
+            \item 在时刻 $t$，若有列车 $r$ 进站 $s$，将该站点等待队列 $L(s,d)$ 中的所有旅客，移入该列车的车载旅客列表 $R(r,t)$ 中，并将 $R(r,t)$ 中所有在该站下车的旅客移除；
+            \item 时刻 $t$ 加一，跳回步骤2，直到所有列车结束；
+        \end{enumerate}
+
+        我们使用最大断面客流量确定最大车厢数，最大断面客流量的定义如公式\ref{eq:p1_def-max-flow}所示。最大断面客流量的含义是，所有列车在所有时刻的运行过程中，某列车某时刻的车载人数的最大值。
+
+        \begin{equation}
+            W = \max_{r,t} R(r,t)
+            \label{eq:p1_def-max-flow}
+        \end{equation}
+
+        根据最大断面客流量，我们可以计算出最多需要的车厢数量，这也是最优的车厢数量，其定义如公式\ref{eq:p1_def-max-car}所示。
+
+        \begin{equation}
+            C = \left\lfloor \frac{W}{400} \right\rfloor
+            \label{eq:p1_def-max-car}
+        \end{equation}
+
+        根据模拟数据，我们分析得出，在早上7:36从1a站发出的列车，从1g站运行到1h站的途中，达到最大断面客流量 852 人，最优车厢节数为 3 节。
+
+        但考虑到实际情况和乘坐舒适性，我们并不建议使用 3 节车厢的编组方式。在我们的认知范围内，没有城市采用 3 节车厢的编组方式，我们建议采用 4-6 节的编组方式最为合适。
+
+    \subsubsection{最优发车间隔的求解}
+
+        目前地铁采用高峰期发车间隔6分钟、平峰期发车间隔10分钟、晚上20点之后发车间隔12分钟的发车模式。结合实际情况，我们对发车间隔提出了如下规定：
+
+        \begin{enumerate}
+            \item 相邻两趟列车的发车间隔不得少于3分钟，以防发生安全事故；
+            \item 相邻两趟列车的发车间隔不得多于15分钟，地铁间隔时间过长影响乘客的出行体验，特别是对于外地来呼和浩特旅游的旅客；
+            \item 发车间隔采用动态调整的方式，在从高峰期向平峰期过渡的阶段，发车间隔可依次变大，例如从3分钟一趟变为6分钟一趟，再变为10分钟一趟；
+            \item 以30分钟为最小考虑跨度，即6:00-6:30、6:30-7:00每30分钟区间采用相同的发车间隔；
+        \end{enumerate}
+
+        我们根据每时刻的进站客流量，结合实际情况，得出了表\ref{tab:p1_interval}的发车间隔时刻表。
+
+        \begin{table}[h]
+            \centering
+            \caption{发车间隔时刻表}
+            \label{tab:p1_interval}
+            \begin{tabular}{c|c}
+                \hline
+                时刻           & 发车间隔 \\ \hline
+                6时 - 7时      & 10 分钟/趟 \\
+                7时30分 - 8时  & 5 分钟/趟 \\
+                8时 - 9时      & 3 分钟/趟 \\
+                9时 - 9时30分  & 5 分钟/趟 \\
+                9时30分 - 11时 & 10 分钟/趟 \\
+                11时 - 13时    & 8 分钟/趟 \\
+                13时 - 16时30分 & 10 分钟/趟 \\
+                16时30分 - 17时 & 6 分钟/趟 \\
+                17时 - 18时30分 & 3 分钟/趟 \\
+                18时30分 - 19时 & 5 分钟/趟 \\
+                19时 - 20时    & 8 分钟/趟 \\
+                20时 - 21时    & 10 分钟/趟 \\
+                21时 - 22时    & 15 分钟/趟 \\
+            \end{tabular}
+        \end{table}
 
 \subsection{问题二的分析和求解}
 由于题目中只要求我们选择地址，但是因为同时存在多个热点区域，所以为了缓解地面交通压力，降低碳排放，现拟建地铁三号线。优化地铁规划建设是建设新地铁线路前必须解决的问题。因为科学的规划建造方案，才能形成有层次性、稳定性的地铁线网结构。
@@ -669,4 +712,13 @@ M的确定：在监控24小时路况时，针对每小时拥堵情况进行累�
 
 2.在相关数据的采集方面可以更加完善，在站点设置上可以通过调查问卷方式了解当地居民的看法，合理化地铁规划。同时可以对不同区域进行细分，基于更多的信息考虑各个区域的权重。
 
+    \textcolor[rgb]{0.98,0.00,0.00}{\textbf{程序二：C++ 求解路网正体影响度:}}
+    \lstinputlisting[language=C++]{./code/mcmthesis-sudoku.cpp}
 
+    \newpage
+    \setcounter{table}{0}
+    \section*{数据表格}
+    \textcolor[rgb]{0.98,0.00,0.00}{\textbf{表格数据：}}
+    \input{Appendices1}
+
+\end{document}
