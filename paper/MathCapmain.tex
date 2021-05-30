@@ -1,20 +1,21 @@
 \documentclass[12pt,a4paper]{mcmthesis}
 \usepackage{ctex}
+\usepackage{lipsum}
 \usepackage{graphicx}
 \usepackage{booktabs,colortbl}
 \usepackage{xcolor}
 \usepackage{tikz}
 \usepackage{indentfirst}
+
 \mcmsetup{CTeX = true,
     tcn ={\xiaowuhao 202105135237 }, problem = A,
     sheet = true, titleinsheet = false, keywordsinsheet = true,
     titlepage = true, abstract = true}
+
 \usepackage{newtxtext}
 \usepackage{lipsum}
-\usepackage{cite}
-\usepackage{amsmath}
-\usepackage{paralist}
 
+\usepackage{paralist}
 \let\itemize\compactitem
 \let\enditemize\endcompactitem
 \let\enumerate\compactenum
@@ -32,7 +33,7 @@
 \colorlet{tableheadcolor}{gray!25} % Table header colour = 25% gray
 \newcommand{\headcol}{\rowcolor{tableheadcolor}}
 
-\title{\textcolor{red}{中小城市地铁运营与建设优化设计}}
+\title{\textcolor{red}{数学建模竞赛论文的题目（三号黑体）}}
 \date{}
 
 \usepackage{zhnumber} % change section number to chinese
@@ -183,7 +184,7 @@
 
     \subsection{数据分析}
     \begin{figure}[h!t]
-        \centerline{\includegraphics[scale=0.4]{发车时间图}\quad
+        \centerline{\includegraphics[scale=0.4]{figures/fig1}\quad
         }
         \caption{\song\wuhao
         发车时间图}
@@ -292,6 +293,18 @@
     \end{equation}
     $Y_{计}$为计划年度运量，$Y_{基}$为基期年度运量，$\beta$ 为年平均增长率，t为年数，然后会根据这个数据进行预测到达多少人才会实现地铁运营的目标。
 
+    \subsection{问题三的分析}
+
+    为了更好解决高峰出行的问题，必须先了解高峰现象发生的实质，以及错峰方案的出行机制。
+
+    1.高峰的发生：排除突发事件的影响，高峰问题本质上是由于现有的地面交通基本条件限制例如行车道数量、路宽等使得人们的出行需求无法被完全满足。因此集中的上下班时间使得道路产生拥堵
+
+    2.实质分析：错峰本质是对乘客进行时间和空间上的分流，空间上的分流指的是不同线路的选择，这里假定居民出行线路选择偏好保持不变，仅考虑时间上的分流，即调节通勤通学的固定式时间。将高峰拆解成一个一个较小峰从而达到平峰的目的。
+
+    3.相关信息：通过结合线上线下办公的新常态的背景，以及疫情下对乘车人口密度的控制情况对已有信息进行建模，求出最佳错峰方案。由于有些城市已经开始实行错峰出行政策，将结果与现有政策进行一定程度上的对比分析。
+
+    \subsection{问题四的分析}
+
 
     \section{模型假设}
 
@@ -317,7 +330,20 @@
 
     \subsection{问题三假设}
 
+    (1)乘客坐车时会选择最先来的车辆，且采用最短的乘车路径。
+
+    (2)终节点到达时间近似为上班时间。
+
+    (3)假设同一时间到达终节点的乘客上班时间可以统一调整。
+
     \subsection{问题四假设}
+
+    \begin{figure}[h]
+        \centering
+        \includegraphics[scale=0.6]{figures/fast-road}
+        \caption{\song\wuhao 快速路}
+        \label{fig:p4_fast-road}
+    \end{figure}
 
 
     \section{模型的建立与求解}
@@ -517,13 +543,13 @@
 
     \subsubsection{限制条件的推导}
     \begin{figure}[h!t]
-        \centerline{\includegraphics[scale=0.6]{呼市地图}\quad
-        }
-        \caption{\song\wuhao
-        呼市地图}
+        \centerline{\includegraphics[scale=0.6]{figures/fig1}\quad}
+        \caption{\song\wuhao 呼市地图}
         \label{fig:呼市地图}
     \end{figure}
+
     首先对该地区进行总体分析，下图 \ref{fig:呼市地图}为该地区地图，通过对地图上主要交通路线分布情况呼和浩特主要交通路线聚集在城市中部以及西北方向。
+
     \begin{figure}[h!t]
         \centerline{\includegraphics[scale=0.6]{城市热力图}\quad
         }
@@ -586,7 +612,7 @@
     (2)线性规划
     在考虑近似直线地铁建造规划时，首先想到利用最小二乘法进行线性回归。这种方法可以拟合出一条直线到各散点的距离差平方和最小。
     但是这种方法的弊端在于使得各个点所含的信息量相同，与实际情况出入较大。我们应该考虑尽可能地接近人流量大的拟合点，为了优化现有的线性规划模型，我们考虑在进行最小二乘法距离求和时，给每个点的距离平方引入权重系数。
-    权重的确定采用打分系统，80%由交通拥堵程度M决定，20%由周边建筑信息N决定。
+    权重的确定采用打分系统，80\%由交通拥堵程度M决定，20\%由周边建筑信息N决定。
     M的确定：在监控24小时路况时，针对每小时拥堵情况进行累加。
     \begin{table}
         \centering
@@ -645,18 +671,82 @@
     上下行两个方向的运营成本记为$F_cost=f_2(L*M，\sum_{m=1}^{s-1}\sum_{n=2}^{s}(q_{m,n}L_{m,n}+q_{n,m}L_{m,n}),s_0)$
     我们的目标函数就是
 
-    \subsection{问题 三的求解和分析 的求解和分析 的求解和分析}
+    \subsection{问题三的求解和分析}
 
-    \subsubsection{对问题的分析}
+    可以用(起始节点,目的节点)表示一条出行轨迹，放入新集合中。为简化计算可以将终节点到达时间视作上班时间，中间经过此时问题变为在已知起点、终点节点坐标以及路程中间经过的所有路段条件下，调节到达时间，使得各个节点流量每个时间控制在相对稳定的情况下。
 
-    问题 三要求我们 $\cdots$。
+    $x_{a}^{pq}$:乘客x的起始乘车点为p点，终止点是q,到达时间为a
 
-    \subsubsection{对问题的求解}
+    \begin{eqnarray}
+        I_{tu}(x_{a}^{pq}) & = & \left\{\begin{matrix}
+                                            0& t时刻乘客x不在地铁u上 \\
+                                            1& t时刻乘客x在地铁u上
+        \end{matrix}\right.
+    \end{eqnarray}
+
+    可通过列车的进出站点以及进出站时间，以及乘客刷卡乘车进出站节点与时间求出每个x对应的不同他t,u下示性函数的值。
+
+    此时目标函数变为
+    \begin{align}
+        \min_{t,u}\max_{i} \sum_{x} I_{t}(x_{a}^{pq})
+    \end{align}
+
+    该模型的限制条件在于对a的调整，a每次调整的幅度$\Delta _{t}$为发车间隔，由于此时为高峰时间段，所以$\Delta _{t}$均为6分钟。本文建议采用贪心算法把所有合理可调整的变化大小进行遍历，最终可求得各个点最优解。
+
+    三.结果分析
+
+    文中仅展示早高峰错峰优化对应结果，且为初步粗略估计结果
+
+    \subsection{问题四的求解和分析}
+
+    在充分考虑呼和浩特市城市快速路的基础之上，你能否提出一个地铁和公交互补的若干新增公交线路，以满足更多人员高峰出行时期的出行效率
+
+    1.问题分析：
+
+    在地面路况监控的过程中，我们发现在距离城区较远的地方也会存在拥堵情况，此时建造地铁成本较大，因此考虑利用灵活的公交线路对地铁未抵达区域进行互补。由于城市快速路主要位于呼和浩特市的中部偏东北部，因此考虑在西南部地区安排公交线路。
+
+    2.建造原则
+
+    在确定公交线路是需要遵循如下步骤：
+
+    STEP1：确定带规划区域大致范围，标出主要出行线路和道路等级。
+
+    STEP2：计算周围居民每天出行量与公交乘车出行意愿，在此基础上确定公交为环线或双向单线。
+
+    STEP3：找到最优最大覆盖公交路径，极大化公交居民出行意愿。
 
 
-    \section{模型的评价与推广 模型的评价与推广}
+    此外还要注意如下细节：
 
-    \textcolor{red}{将模型进行数值计算，并与附件中的真实采样值（进行列表或图示）比较。对误差进行数据分析，给出误差分析的理论估计。}
+    (1)线路长度适中，停靠站点数量合理
+
+    (2)做好与主干线的衔接，提供更多的换乘可能性
+
+    (3)结合周边环境、自然进行规划设计
+
+    \begin{table}[h]
+        \centering
+        \caption{列车发车时刻与到站点对应表}
+        \label{tab:p4_timetable}
+        \begin{tabular}{c|ccccccccc}
+            \hline
+            发车时间 & 6:30 & 6:40 & 6:50 & 7:00 & 7:06 & 7:12 & 7:18 & 7:24 & 7:30 \\ \hline
+            到站节点 & 1j   & 2a   & 1c   & 1g   & 1i   & 1l   & 2o   & 2e   & 2b   \\
+            & 2p   &      & 1m   & 1r   & 2c   & 2t   &      & 2i   &      \\
+            &      &      & 2w   &      &      &      &      &      &      \\ \hline
+            发车时间 & 7:36 & 7:42 & 7:48 & 7:54 & 8:00 & 8:06 & 8:12 & 8:18 & 8:24 \\
+            到站节点 & 1e   & 2j   & 1b   & 1o   & 1k   & 1d   & 2d   & 2f   & 1h   \\
+            & 2u   &      & 1f   &      &      &      & 2l   & 2v   &      \\ \hline
+            发车时间 & 8:30 & 8:36 & 8:42 & 8:48 & 8:54 & 9:00 & 9:10 & 9:20 & 9:30 \\
+            到站节点 & 1a   & 1s   & 1n   & 1p   & 2h   & 2k   & 2q   & 2g   & 1t   \\
+            & 1q   & 2r   &      & 2n   &      &      & 2s   & 2m   &      \\
+            &      &      &      & 2x   &      &      &      &      &      \\ \hline
+        \end{tabular}
+    \end{table}
+
+    3.总结反思
+
+    在实际情况中，公交选线一般将提案与实际情况相结合，按照经验与试运营情况权衡出合适的线路。关注城市的发展，与客流数据的动态变化，找到合适的方案。
 
     \subsection{模型的评价}
 
@@ -699,8 +789,6 @@
 
         \item \textcolor{red}{推广和优化，需要花费功夫想出合理的、甚至可以合理改变题目给出的条件的、不一定可行但是具有一定想象空间的准理想的方法、模型。由此做出一些改进方向，也可以是参赛者一些来不及实现的思路。}
     \end{itemize}
-
-    ．
 
 
     \section{模型的改进}
