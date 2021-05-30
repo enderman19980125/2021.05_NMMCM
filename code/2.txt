@@ -1,0 +1,28 @@
+import requests
+import re
+def query(addr):
+    template = 'https://apis.map.qq.com/jsapi?qt=geoc&addr={addr}&key=UGMBZ-CINWR-DDRW5-W52AK-D3ENK-ZEBRC&output=jsonp&pf=jsapi&ref=jsapi&cb=qq.maps._svcb2.geocoder0'
+    url = template.format(addr=addr)
+    resp = requests.get(url)
+    x = re.findall('pointx":"(.*?)",',resp.text)[0]
+    y = re.findall('pointy":"(.*?)",',resp.text)[0]
+    return x,y
+
+import pandas as pd
+import numpy as np
+df = pd.read_csv("E:/data.csv",header=None)
+df = df.rename(columns={0:'j',1:'w'})
+r = 6400
+df['theta'] = df['j']*math.pi/180
+df['fy'] = df['w']*math.pi/180
+df['x'] = r*np.cos(df['theta'])*np.cos(df['fy'])
+df['y'] = r*np.cos(df['theta'])*np.sin(df['fy'])
+df['z'] = r*np.sin(df['theta'])
+df1 = df.iloc[0:44,4:]
+df2 = df.iloc[44:,4:]
+df1 = np.array(df1)
+df2 = np.array(df2)
+l = []
+for i in range(44):
+    s = np.sum(np.power(df2 - df1[i,:],2))
+    l.append(s)
